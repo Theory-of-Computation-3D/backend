@@ -20,7 +20,7 @@ def select(request, *args, **kwargs):
     recv = Wat()
     recv.province = data["Select(number)"]
     recv.select_province(recv.province)
-    return JsonResponse(recv.data, safe=False)
+    return JsonResponse({"list": recv.data})
 
 def download(request, *args, **kwargs):
     body = request.body
