@@ -14,20 +14,20 @@ def api_home(request, *args, **kwargs):
     return JsonResponse({"what": "its working huh"})
 
 def select(request, *args, **kwargs):
-    body = request.body
+    params = request.GET.get('Select(number)', '')
     data = {}
-    data = json.loads(body)
+    data = json.loads(params)
     recv = Wat()
-    recv.province = data["Select(number)"]
+    recv.province = data
     recv.select_province(recv.province)
-    return JsonResponse({"list": recv.data})
+    return JsonResponse(recv.data, safe= False)
 
 def download(request, *args, **kwargs):
-    body = request.body
+    params = request.GET.get('Select(number)', '')
     data = {}
-    data = json.loads(body)
+    data = json.loads(params)
     recv = Wat()
-    recv.province = data["Select(number)"]
+    recv.province = data
     recv.select_province(recv.province)
     recv.saveCSV()
     fileName = recv.provinceName
