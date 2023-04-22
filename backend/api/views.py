@@ -2,6 +2,9 @@ from django.http import JsonResponse, HttpResponse
 import json
 from getData import Wat 
 import os
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from django.urls import reverse
 
 def api_home(request, *args, **kwargs):
     body = request.body
@@ -39,3 +42,8 @@ def download(request, *args, **kwargs):
             return response
     else:
         return JsonResponse({"error":"404"})
+
+@api_view(['GET'])
+def downloadapi(request, *args, **kwargs):
+    download_url = reverse('download')
+    return Response({'download_url': download_url})
